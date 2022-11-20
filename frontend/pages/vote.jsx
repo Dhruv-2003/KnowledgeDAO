@@ -93,11 +93,11 @@ export default function Vote() {
         <div className=" mx-auto flex-row flex flex-wrap items-start justify-center ">
           {articles ? (
             articles.map((article) => {
-              return article.voting ? (
+              return article.Voting ? (
                 <div className="max-w-sm my-3 md:mx-4">
                   <VoteCard
-                    title={"Learn to Code in HTML"}
-                    name={"Kushagra Sarathe"}
+                    title={article.ArticleName}
+                    name={article.PublisherName}
                     voteCount={20}
                   />
                 </div>
@@ -106,7 +106,7 @@ export default function Vote() {
               );
             })
           ) : (
-            <a>No Article for voting </a>
+            <a> No Article for voting </a>
           )}
         </div>
       </div>

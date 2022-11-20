@@ -9,6 +9,11 @@ export const POPNFT_Address = "0x2D18A3a1015a81DDd7ad3028bc814224bC2Fd49a";
 export const DAOVoting_Address = "0x172d8d1Cd2550A164d99cd7C4ABA41890eE4F190";
 export const DAONFT_Address = "0xCc5FEc113BF4d6bbe78F66a00D7DF5876732f920";
 
+export const POPNFT_URI =
+  "https://ipfs.io/ipfs/bafkreid4maveb6r7kfmssnryrnji44lvj3rr33qufyasjty575uxj332pm";
+export const MemberNFT_URI =
+  "https://ipfs.io/ipfs/bafkreifm556t45oh33jhndqesghndk4takhwszyptompmi4dy54xcngjzy";
+
 export const ArticleManager_ABI = [
   {
     inputs: [

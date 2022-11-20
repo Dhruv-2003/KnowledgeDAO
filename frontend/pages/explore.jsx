@@ -5,6 +5,7 @@ import {
   ArticleManager_Address,
 } from "../constants/constants";
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+import { Spinner } from "flowbite-react";
 
 export default function Explore() {
   const [articles, setArticles] = useState([]);
@@ -81,6 +82,10 @@ export default function Explore() {
       <h1 className="text-center text-3xl  font-bold py-8 underline dark:text-white">
         Read Articles
       </h1>
+      <div className="flex justify-center items-center mt-[-200px] min-h-screen">
+        <Spinner aria-label="Default status example" />
+      </div>
+
       <div className=" mx-auto  py-4 w-96 md:w-6/12">
         {articles ? (
           articles.map((article, key) => {

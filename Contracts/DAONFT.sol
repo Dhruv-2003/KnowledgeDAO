@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.15;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -13,7 +13,7 @@ contract DAOMemberNFT is ERC721, ERC721Enumerable, Ownable {
     Counters.Counter private _tokenIdCounter;
     string baseURI;
 
-    uint256 public price = 0.05 ether;
+    uint256 public price = 1 ether;
 
     mapping(address => bool) public approved;
 

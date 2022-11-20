@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.14;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -48,15 +48,16 @@ contract DAOVoting is Ownable {
     mapping(address => mapping(uint256 => bool)) hasVoted;
     mapping(uint256 => Proposal) public proposals;
 
-    uint256 public totalProposals;
+    uint32 public totalProposals;
 
-    constructor(address _nftAddress, address _managerAddress) public {
+    constructor(address _nftAddress, address _managerAddress) {
         _nft = DAONFT(_nftAddress);
         _manager = ArticleManager(_managerAddress);
     }
 
     modifier onlyDAOMember() {
         require(_nft.balanceOf(msg.sender) > 0, "You are not a DAO Member");
+        _;
     }
 
     modifier onlyArticleOwner(uint32 articleId) {
@@ -64,14 +65,15 @@ contract DAOVoting is Ownable {
             msg.sender == _manager.getResearch(articleId).publisher,
             "You are not the article Publisher"
         );
+        _;
     }
 
-    modifier isProposalActive() {
+    modifier isProposalActive(uint32 proposalsIndex) {
         require(proposals[proposalsIndex].deadline >= block.timestamp);
         _;
     }
 
-    modifier isProposalEnded() {
+    modifier isProposalEnded(uint32 proposalsIndex) {
         require(proposals[proposalsIndex].deadline <= block.timestamp);
         _;
     }
@@ -95,22 +97,25 @@ contract DAOVoting is Ownable {
             block.timestamp + votingPeriod,
             false
         );
+
+        totalProposals += 1;
+        return proposalId;
     }
 
-    function vote(uint256 proposalId, Vote vote)
+    function vote(uint32 proposalId, Vote _vote)
         public
         onlyDAOMember
-        isProposalActive
+        isProposalActive(proposalId)
     {
         Proposal storage proposal = proposals[proposalId];
-        if (vote == Vote.Yes) {
+        if (_vote == Vote.Yes) {
             proposal.yayVotes += 1;
         } else proposal.nayVotes += 1;
     }
 
-    function executeProposal(uint256 proposalId)
+    function executeProposal(uint32 proposalId)
         public
-        isProposalEnded
+        isProposalEnded(proposalId)
         onlyOwner
     {
         Proposal storage proposal = proposals[proposalId];
@@ -122,6 +127,7 @@ contract DAOVoting is Ownable {
 
             /// send some rewards
             (bool sent, ) = publisher.call{value: rewardAmount}("");
+            require(sent, "Not sent");
         }
     }
 }

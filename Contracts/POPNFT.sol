@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.14;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -8,6 +8,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /// SOUL BOUND Token minted directly to the
 contract POPNFT is ERC721, ERC721URIStorage, Ownable {
     address public managerAddress;
+
+    event Attest(address indexed to, uint256 indexed tokenId);
+    event Revoke(address indexed to, uint256 indexed tokenId);
 
     constructor() ERC721("ProofOfPublish", "POP") {}
 
@@ -52,7 +55,7 @@ contract POPNFT is ERC721, ERC721URIStorage, Ownable {
         address from,
         address to,
         uint256 tokenId
-    ) internal override(ERC721, ERC721Enumerable) {
+    ) internal {
         require(
             to == address(0) || from == address(0),
             "The NFT is non transferrable"
@@ -82,7 +85,7 @@ contract POPNFT is ERC721, ERC721URIStorage, Ownable {
         address from,
         address to,
         uint256 tokenId
-    ) internal override {
+    ) internal {
         if (from == address(0)) {
             emit Attest(to, tokenId);
         } else if (to == address(0)) {
@@ -93,7 +96,7 @@ contract POPNFT is ERC721, ERC721URIStorage, Ownable {
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, ERC721Enumerable)
+        override(ERC721)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);

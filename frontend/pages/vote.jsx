@@ -20,8 +20,8 @@ export default function Vote() {
               </div>
               <div className="max-w-sm my-3 md:mx-4">
                 <VoteCard
-                  title={"Learn to Code in HTML"}
-                  name={"Kushagra Sarathe"}
+                  title={"Improve coding logic"}
+                  name={"Dhruv Agarwal"}
                   voteCount={20}
                 />
               </div>

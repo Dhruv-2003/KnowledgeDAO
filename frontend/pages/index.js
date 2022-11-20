@@ -2,6 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import dark_img from "../assets/dark.png";
+import light_img from "../assets/light.png";
+import JoinDao from "../components/JoinDao";
 
 export default function Home() {
   return (
@@ -13,7 +16,18 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen dark:bg-gray-900">
-        <h1 className="text-center pt-16 text-5xl font-semibold underline dark:text-white">Welcome to KnowledgeDAO</h1>
+        <h1 className="text-center pt-16 text-4xl font-semibold underline dark:text-white">
+          Welcome to KnowledgeDAO
+        </h1>
+        <h2 className="text-center pt-8 text-xl font-semibold underline dark:text-white">
+          Publish articles on FEVM, get them verified and earn rewards in FILCOIN
+        </h2>
+        <div className="mx-auto flex items-center justify-center py-12">
+          <JoinDao />
+        </div>
+        <div className="w-11/12 md:w-6/12 mx-auto ">
+          <Image src={light_img} />
+        </div>
       </main>
     </div>
   );

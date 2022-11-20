@@ -82,6 +82,14 @@ export default function NewArticle() {
         <h1 className=" text-4xl font-semibold py-6 underline dark:text-white">
           {article.ArticleName}
         </h1>
+        <div className="flex justify-between">
+        <h2 className=" text-sm font-semibold py-2 underline dark:text-white">
+          {article.PublisherName}
+        </h2>
+        <h2 className="  text-sm font-semibold py-2 underline dark:text-white">
+          {article.PublisherAddress}
+        </h2>
+        </div>
         <p className="text-lg font-noraml text-justify py-6 mb-4 dark:text-white">
           {article.ArticleContent}
         </p>

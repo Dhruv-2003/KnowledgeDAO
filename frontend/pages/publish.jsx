@@ -125,6 +125,8 @@ export default function Publish() {
         _nftURI
       );
       await tx.wait();
+
+      /// nft has to be minted from the contract
       console.log(tx);
       const _id = tx.v;
       console.log(_id);

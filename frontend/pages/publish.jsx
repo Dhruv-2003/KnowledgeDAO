@@ -6,15 +6,30 @@ import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 import {
   ArticleManager_ABI,
   ArticleManager_Address,
+  DAOVoting_ABI,
+  DAOVoting_Address,
 } from "../constants/constants";
 
 import { StoreArticle } from "../functionality/storeArticle";
+import { StoreMedia } from "../functionality/storeImages";
+import { StoreMetadata } from "../functionality/storeMetadata";
+import { ethers } from "ethers";
 import Pusblished from "../components/Pusblished";
 
 export default function Publish() {
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [media, setMedia] = useState([]);
+  const [domain, setDomain] = useState("");
+
+  const [editedDomain, setEditedDomain] = useState("");
+  const [mediaURI, setMediaURI] = useState("");
+  const [articleURI, setArticleURI] = useState("");
+  const [nftURI, setNftURI] = useState("");
+  const [articleLink, setArticleLink] = useState("");
+
+  const [articleID, setArticleID] = useState(0);
 
   const { address, isConnected } = useAccount();
   const provider = useProvider();
@@ -26,10 +41,111 @@ export default function Publish() {
     signerOrProvider: signer || provider,
   });
 
-  const uploadArticle = async () => {
+  const DAOVoting_Contract = useContract({
+    address: DAOVoting_Address,
+    abi: DAOVoting_ABI,
+    signerOrProvider: signer || provider,
+  });
+
+  useEffect(() => {
+    generateArticleLink();
+  }, [domain]);
+
+  const generateArticleLink = () => {
+    const newdomain = domain.replace(/ /g, "-");
+    console.log(newdomain);
+    setEditedDomain(newdomain);
+    const _articleLink = `https://localhost:3000/article/${newdomain}`;
+    console.log(_articleLink);
+    setArticleLink(_articleLink);
+  };
+
+  const handlePublish = async () => {
+    try {
+      generateArticleLink();
+      if (media) {
+        uploadMedia();
+      } else {
+        uploadArticle("");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadMedia = async () => {
+    try {
+      console.log("Storing the Media ...");
+      const cid = await StoreMedia(media);
+      const URI = `https://ipfs.io/ipfs/${cid}`;
+      setMediaURI(URI);
+      console.log(URI);
+      uploadArticle(URI);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadArticle = async (_mediaURI) => {
     try {
       console.log("Storing the Article ...");
-      const cid = await StoreArticle(name, address, title, content);
+      const cid = await StoreArticle(name, address, title, content, _mediaURI);
+      const URI = `https://ipfs.io/ipfs/${cid}`;
+      console.log(URI);
+      setArticleURI(URI);
+      createNFT(URI);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const createNFT = async (_articleURI) => {
+    try {
+      console.log("Creating the NFT Metadata ..");
+      const cid = await StoreMetadata(
+        image,
+        title,
+        name,
+        _articleURI,
+        articleLink
+      );
+      const URI = `https://ipfs.io/ipfs/${cid}`;
+      console.log(URI);
+      setNftURI(URI);
+      publish(URI, _articleURI);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const publish = async (_nftURI, _articleURI) => {
+    try {
+      console.log("Publishing the Article , tx incoming --> ");
+      const tx = await ArticleManager_Contract.publishResearch(
+        _articleURI,
+        editedDomain,
+        _nftURI
+      );
+      await tx.wait();
+      console.log(tx);
+      const _id = tx.v;
+      console.log(_id);
+      setArticleID(_id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const startVerifying = async () => {
+    try {
+      console.log("Starting Article Verification ..");
+      const amount = ethers.utils.parseEther("0.5");
+      const tx = await DAOVoting_Contract.addProposal(articleID, {
+        value: amount,
+      });
+
+      await tx.wait();
+      console.log("Verfiication Started");
     } catch (err) {
       console.log(err);
     }
@@ -139,13 +255,21 @@ export default function Publish() {
                   SVG, PNG, JPG or GIF (MAX. 800x400px)
                 </p>
               </div>
-              <input id="dropzone-file" type="file" className="hidden" />
+              <input
+                id="dropzone-file"
+                type="file"
+                className="hidden"
+                onChange={(e) => setMedia(e.target.files)}
+              />
             </label>
           </div>
 
           <button
             type="submit"
             className="my-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={() => {
+              handlePublish();
+            }}
           >
             Submit
           </button>

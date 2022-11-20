@@ -11,7 +11,7 @@ function makeStorageClient() {
 }
 
 /// muiltple files
-export const StoreData = async (files) => {
+export const StoreMedia = async (files) => {
   const client = makeStorageClient();
   const cid = await client.put(files, {
     wrapWithDirectory: false,

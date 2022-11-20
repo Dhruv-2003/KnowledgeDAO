@@ -4,15 +4,4 @@ const nextConfig = {
   swcMinify: true,
 };
 
-module.exports = {
-  nextConfig,
-  reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**.ipfs.io",
-      },
-    ],
-  },
-};
+module.exports = nextConfig;

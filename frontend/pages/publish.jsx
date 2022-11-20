@@ -3,6 +3,10 @@ import { Editor } from "@tinymce/tinymce-react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+import {
+  ArticleManager_ABI,
+  ArticleManager_Address,
+} from "../constants/constants";
 
 export default function Publish() {
   const [name, setName] = useState("");
@@ -13,9 +17,9 @@ export default function Publish() {
   const provider = useProvider();
   const { data: signer } = useSigner();
 
-  const Contract = useContract({
-    address: data.address,
-    abi: data.abi,
+  const ArticleManager_Contract = useContract({
+    address: ArticleManager_Address,
+    abi: ArticleManager_ABI,
     signerOrProvider: signer || provider,
   });
 

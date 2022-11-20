@@ -1,3 +1,4 @@
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button, DarkThemeToggle, Flowbite, Navbar } from "flowbite-react";
 import Image from "next/image";
 import React, { Children } from "react";
@@ -21,7 +22,8 @@ export default function Layout({ children }) {
           <Flowbite >
             <DarkThemeToggle className="mx-3" />
           </Flowbite>
-          <Button>Get started</Button>
+          {/* <Button>Get started</Button> */}
+          <ConnectButton />
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>

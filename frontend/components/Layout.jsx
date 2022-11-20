@@ -23,7 +23,9 @@ export default function Layout({ children }) {
             <DarkThemeToggle className="mx-3" />
           </Flowbite>
           {/* <Button>Get started</Button> */}
+          <div className="text-[0px] md:text-sm">
           <ConnectButton />
+          </div>
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>

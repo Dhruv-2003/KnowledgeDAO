@@ -65,7 +65,27 @@ export default function Publish() {
               />
             </div>
           </div>
-          <div className="grid gap-0 mb-3 md:grid-cols-1">
+          <div>
+              <div className="flex justify-between">
+              <label className=" block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Choose article Path
+              </label>
+              <label className=" block mb-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+              &#40;e.g: knowledgedao/article/learn-to-code&#41;
+              </label>
+              </div>
+              <input
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+                type="text"
+                id="first_name"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter pathname of your choice..."
+                required
+              />
+            </div>
+          <div className="mt-5 grid gap-0 mb-3 md:grid-cols-1">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Content
             </label>

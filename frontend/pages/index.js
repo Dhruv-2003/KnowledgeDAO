@@ -12,7 +12,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="min-h-screen dark:bg-gray-900"></main>
+      <main className="min-h-screen dark:bg-gray-900">
+        <h1 className="text-center pt-16 text-5xl font-semibold underline dark:text-white">Welcome to KnowledgeDAO</h1>
+      </main>
     </div>
   );
 }

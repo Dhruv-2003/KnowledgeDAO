@@ -11,6 +11,7 @@ import {
 } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import Layout from "../components/Layout";
 
 // const wallabyChain: Chain = {
 //   id: 31415,
@@ -50,7 +51,11 @@ import { publicProvider } from "wagmi/providers/public";
 // });
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 // function MyApp({ Component, pageProps }) {
 //   return(

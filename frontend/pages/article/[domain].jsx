@@ -78,7 +78,7 @@ export default function NewArticle() {
 
   return (
     <div className=" dark:bg-gray-900 min-h-screen flex flex-col  items-center justify-start pt-6">
-      <div className=" mx-auto w-6/12">
+      <div className=" mx-auto md:w-7/12 px-4">
         <h1 className=" text-4xl font-semibold py-6 underline dark:text-white">
           Title Here
         </h1>
@@ -89,7 +89,7 @@ export default function NewArticle() {
           cum, numquam ipsum nulla dolore?
         </p>
       </div>
-      <div className=" mx-auto w-6/12">
+      <div className=" mx-auto md:w-7/12 px-4">
         <Image src={dark} />
       </div>
     </div>

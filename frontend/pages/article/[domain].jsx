@@ -7,6 +7,7 @@ import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import dark from "../../assets/dark.png";
+import { Badge } from "flowbite-react";
 
 export default function NewArticle() {
   const [article, setArticle] = useState({});
@@ -83,12 +84,18 @@ export default function NewArticle() {
           {article.ArticleName}
         </h1>
         <div className="flex justify-between">
-        <h2 className=" text-sm font-semibold py-2 underline dark:text-white">
-          {article.PublisherName}
-        </h2>
-        <h2 className="  text-sm font-semibold py-2 underline dark:text-white">
-          {article.PublisherAddress}
-        </h2>
+          <h2 className=" text-sm font-semibold py-2 underline dark:text-white">
+            {article.PublisherName}
+          </h2>
+          <h2 className="  text-sm font-semibold py-2 underline dark:text-white">
+            {article.PublisherAddress}
+          </h2>
+          <span>
+            {article.verified}
+            <Badge className="" color="purple">
+              Verified
+            </Badge>
+          </span>
         </div>
         <p className="text-lg font-noraml text-justify py-6 mb-4 dark:text-white">
           {article.ArticleContent}

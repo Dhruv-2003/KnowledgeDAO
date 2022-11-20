@@ -1,5 +1,5 @@
 export const ArticleManager_Address =
-  "0xddEF21eDe830A495E93Dbd340a01d5C544b4Cedc";
+  "0xB1BD05F9d06595F11Bd50E8640100F7D9546091f";
 export const POPNFT_Address = "0x2D18A3a1015a81DDd7ad3028bc814224bC2Fd49a";
 export const DAOVoting_Address = "0x172d8d1Cd2550A164d99cd7C4ABA41890eE4F190";
 export const DAONFT_Address = "0xCc5FEc113BF4d6bbe78F66a00D7DF5876732f920";
@@ -101,6 +101,25 @@ export const ArticleManager_ABI = [
       },
     ],
     name: "domains",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_domain",
+        type: "string",
+      },
+    ],
+    name: "getArticleId",
     outputs: [
       {
         internalType: "uint32",
@@ -271,6 +290,19 @@ export const ArticleManager_ABI = [
   },
   {
     inputs: [],
+    name: "nftAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owner",
     outputs: [
       {
@@ -376,6 +408,19 @@ export const ArticleManager_ABI = [
       },
     ],
     name: "setDAOAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_nftAddress",
+        type: "address",
+      },
+    ],
+    name: "setNFTAddress",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

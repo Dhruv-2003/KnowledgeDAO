@@ -147,4 +147,8 @@ contract ArticleManager is Ownable {
     {
         return personalArticlesPublished[userAddress][_personalArticleId];
     }
+
+    function getArticleId(string memory _domain) public view returns (uint32) {
+        return domains[_domain];
+    }
 }

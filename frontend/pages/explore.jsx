@@ -83,12 +83,13 @@ export default function Explore() {
       </h1>
       <div className=" mx-auto  py-4 w-96 md:w-6/12">
         {articles ? (
-          articles.map((article) => {
+          articles.map((article, key) => {
             return (
               <Article
                 content={article.ArticleContent}
                 title={article.ArticleName}
                 verified={article.Verified}
+                key={key}
                 link={`https://localhost:3000/article/${article.Domain}`}
               />
             );

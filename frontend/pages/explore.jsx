@@ -90,7 +90,7 @@ export default function Explore() {
                 title={article.ArticleName}
                 verified={article.Verified}
                 key={key}
-                link={`https://localhost:3000/article/${article.Domain}`}
+                link={`http://localhost:3000/article/${article.Domain}`}
               />
             );
           })

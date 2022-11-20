@@ -83,7 +83,8 @@ export default function Explore() {
         Read Articles
       </h1>
       <div className="flex justify-center items-center mt-[-200px] min-h-screen">
-        <Spinner aria-label="Default status example" />
+        <Spinner aria-label="Default status example"></Spinner>
+        <span className="mx-2"> Loading Articles...</span>
       </div>
 
       <div className=" mx-auto  py-4 w-96 md:w-6/12">

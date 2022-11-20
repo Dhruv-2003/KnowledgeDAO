@@ -8,7 +8,13 @@ module.exports = {
   nextConfig,
   reactStrictMode: true,
   images: {
-    domains: ["ipfs.io", "imagizer.imageshack.com"],
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "example.com",
+        port: "",
+        pathname: "/account123/**",
+      },
+    ],
   },
 };

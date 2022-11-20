@@ -28,6 +28,7 @@ contract DAOVoting is Ownable {
 
     uint256 public votingCost = 0.5 ether;
     uint256 public votingPeriod = 2 days;
+    uint256 public rewardAmount = 1 ether;
 
     enum Vote {
         Yes, // Yes = 0

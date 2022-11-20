@@ -4,10 +4,15 @@ export const NFT_STORAGE_API_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEVERWJCMEZCNTk3REI4MTUxNkU5M2Y4YmM3RjJmQ0Q2ODYzNDAyOEUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1ODU4MDY5OTE4MSwibmFtZSI6Ik11c2ljMyJ9.V6Ny_9VV_XLIIFDFIEG8alEdJTwxmfHJMaMDJEf00L4";
 
 export const ArticleManager_Address =
-  "0xddEF21eDe830A495E93Dbd340a01d5C544b4Cedc";
-export const POPNFT_Address = "0x2D18A3a1015a81DDd7ad3028bc814224bC2Fd49a";
+  "0x12f059175Fe7027fDCAE54c5FF40F6393Be378B7";
+export const POPNFT_Address = "0xEFa08fa2b8adc46CabA7BDBAC894923190Ee8B2e";
 export const DAOVoting_Address = "0x172d8d1Cd2550A164d99cd7C4ABA41890eE4F190";
 export const DAONFT_Address = "0xCc5FEc113BF4d6bbe78F66a00D7DF5876732f920";
+
+export const POPNFT_URI =
+  "https://ipfs.io/ipfs/bafkreid4maveb6r7kfmssnryrnji44lvj3rr33qufyasjty575uxj332pm";
+export const MemberNFT_URI =
+  "https://ipfs.io/ipfs/bafkreifm556t45oh33jhndqesghndk4takhwszyptompmi4dy54xcngjzy";
 
 export const ArticleManager_ABI = [
   {
@@ -106,6 +111,25 @@ export const ArticleManager_ABI = [
       },
     ],
     name: "domains",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_domain",
+        type: "string",
+      },
+    ],
+    name: "getArticleId",
     outputs: [
       {
         internalType: "uint32",
@@ -276,6 +300,19 @@ export const ArticleManager_ABI = [
   },
   {
     inputs: [],
+    name: "nftAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owner",
     outputs: [
       {
@@ -381,6 +418,19 @@ export const ArticleManager_ABI = [
       },
     ],
     name: "setDAOAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_nftAddress",
+        type: "address",
+      },
+    ],
+    name: "setNFTAddress",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

@@ -9,7 +9,6 @@ import {
   WagmiConfig,
   Chain,
 } from "wagmi";
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import Layout from "../components/Layout";
 
@@ -36,7 +35,7 @@ const wallabyChain = {
 
 const { chains, provider } = configureChains(
   [wallabyChain],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+  [publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
@@ -50,13 +49,6 @@ const wagmiClient = createClient({
   provider,
 });
 
-// function MyApp({ Component, pageProps }) {
-//   return (
-//     <Layout>
-//       <Component {...pageProps} />
-//     </Layout>
-//   );
-// }
 function MyApp({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>

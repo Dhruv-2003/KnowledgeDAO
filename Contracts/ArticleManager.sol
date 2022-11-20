@@ -16,8 +16,8 @@ contract ArticleManager is Ownable {
     // Allows to register a Article , mint an NFT
     // Verification of an Article , voting record
     address public DAOAddress;
-
-    POPNFT _nft;
+    address public nftAddress;
+    POPNFT _nft = POPNFT(nftAddress);
 
     /// Struct for the Article storage
     struct Article {
@@ -44,7 +44,7 @@ contract ArticleManager is Ownable {
     mapping(string => uint32) public domains;
 
     constructor(address _popNFTContract) {
-        _nft = POPNFT(_popNFTContract);
+        nftAddress = _popNFTContract;
     }
 
     modifier onlyAuthorised() {
@@ -57,6 +57,10 @@ contract ArticleManager is Ownable {
 
     function setDAOAddress(address _daoAddress) public onlyOwner {
         DAOAddress = _daoAddress;
+    }
+
+    function setNFTAddress(address _nftAddress) public onlyOwner {
+        nftAddress = _nftAddress;
     }
 
     /// @dev function publishResearch
@@ -80,9 +84,9 @@ contract ArticleManager is Ownable {
         /// Storing the Record
         ArticlesPublished[articleId] = _article;
         personalArticlesPublished[msg.sender][personalArticleId] = _article;
-
+        domains[domainName] = articleId;
         ///NFT minted
-        _nft.safeMint(msg.sender, articleId, _nftURI);
+        // _nft.safeMint(msg.sender, articleId, _nftURI);
 
         /// Increment
         totalArticles += 1;
@@ -142,5 +146,9 @@ contract ArticleManager is Ownable {
         returns (Article memory)
     {
         return personalArticlesPublished[userAddress][_personalArticleId];
+    }
+
+    function getArticleId(string memory _domain) public view returns (uint32) {
+        return domains[_domain];
     }
 }

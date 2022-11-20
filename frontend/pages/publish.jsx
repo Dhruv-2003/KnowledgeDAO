@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
-
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 import {
   ArticleManager_ABI,
   ArticleManager_Address,
   DAOVoting_ABI,
   DAOVoting_Address,
+  POPNFT_URI,
 } from "../constants/constants";
 
 import { StoreArticle } from "../functionality/storeArticle";
@@ -53,10 +53,8 @@ export default function Publish() {
 
   const generateArticleLink = () => {
     const newdomain = domain.replace(/ /g, "-");
-    console.log(newdomain);
     setEditedDomain(newdomain);
     const _articleLink = `https://localhost:3000/article/${newdomain}`;
-    console.log(_articleLink);
     setArticleLink(_articleLink);
   };
 
@@ -103,7 +101,7 @@ export default function Publish() {
     try {
       console.log("Creating the NFT Metadata ..");
       const cid = await StoreMetadata(
-        image,
+        POPNFT_URI,
         title,
         name,
         _articleURI,
@@ -127,6 +125,8 @@ export default function Publish() {
         _nftURI
       );
       await tx.wait();
+
+      /// nft has to be minted from the contract
       console.log(tx);
       const _id = tx.v;
       console.log(_id);
@@ -197,12 +197,13 @@ export default function Publish() {
                 Choose article Path
               </label>
               <label className=" block mb-2 text-sm font-medium text-gray-500 dark:text-gray-300">
-                &#40;e.g: knowledgedao/article/learn-to-code&#41;
+                {/* &#40;e.g: knowledgedao/article/learn-to-code&#41; */}
+                &#40;As : ${articleLink} &#41;
               </label>
             </div>
             <input
               onChange={(e) => {
-                setTitle(e.target.value);
+                setDomain(e.target.value);
               }}
               type="text"
               id="first_name"

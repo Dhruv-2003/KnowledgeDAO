@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { NFTStorage } from "nft.storage";
-import { NFT_STORAGE_API_KEY } from "../constants";
+import { NFT_STORAGE_API_KEY } from "../constants/constants";
 
 /// used NFT.storage to prepare the metadata for the NFT
 export const StoreMetadata = async (

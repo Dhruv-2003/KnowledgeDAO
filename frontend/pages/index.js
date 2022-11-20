@@ -14,6 +14,7 @@ export default function Home() {
 
       <main className="min-h-screen dark:bg-gray-900">
         <h1 className="text-center pt-16 text-5xl font-semibold underline dark:text-white">Welcome to KnowledgeDAO</h1>
+        <h2 className="text-center pt-8 text-xl font-semibold underline dark:text-white">Publish articles on FEVM and get paid in FILCOIN</h2>
       </main>
     </div>
   );

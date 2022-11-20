@@ -18,7 +18,6 @@ export const StoreMetadata = async (image, Name, invoiceURI) => {
   console.log(metadata);
   console.log("NFT data stored successfully 🚀🚀");
   console.log("Metadata URI: ", metadata.url);
-  // SetMetadataURI(metadata.url);
 
   return metadata;
 };

@@ -1,4 +1,4 @@
-import { Button, Card } from "flowbite-react";
+import { Button, Card, Tabs } from "flowbite-react";
 import React from "react";
 import VoteCard from "../components/VoteCard";
 
@@ -9,29 +9,30 @@ export default function Vote() {
         <h1 className="text-center text-3xl underline font-bold py-8  dark:text-white">
           Vote
         </h1>
-        <div className=" mx-auto flex-row flex flex-wrap items-start justify-center ">
-          <div className="max-w-sm my-3 md:mx-4">
-            <VoteCard
-              title={"Learn to Code in HTML"}
-              name={"Kushagra Sarathe"}
-              voteCount={20}
-            />
-          </div>
-          <div className="max-w-sm my-3 md:mx-4">
-            <VoteCard
-              title={"Learn to Code in HTML"}
-              name={"Kushagra Sarathe"}
-              voteCount={20}
-            />
-          </div>
-          <div className="max-w-sm my-3 md:mx-4">
-            <VoteCard
-              title={"Learn to Code in HTML"}
-              name={"Kushagra Sarathe"}
-              voteCount={20}
-            />
-          </div>
-        </div>
+
+            <div className=" mx-auto flex-row flex flex-wrap items-start justify-center ">
+              <div className="max-w-sm my-3 md:mx-4">
+                <VoteCard
+                  title={"Learn to Code in HTML"}
+                  name={"Kushagra Sarathe"}
+                  voteCount={20}
+                />
+              </div>
+              <div className="max-w-sm my-3 md:mx-4">
+                <VoteCard
+                  title={"Learn to Code in HTML"}
+                  name={"Kushagra Sarathe"}
+                  voteCount={20}
+                />
+              </div>
+              <div className="max-w-sm my-3 md:mx-4">
+                <VoteCard
+                  title={"Learn to Code in HTML"}
+                  name={"Kushagra Sarathe"}
+                  voteCount={20}
+                />
+              </div>
+            </div>
       </div>
     </div>
   );

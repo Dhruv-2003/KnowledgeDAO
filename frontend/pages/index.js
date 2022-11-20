@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="bg-red-400 min-h-screen">
+      <main className="min-h-screen dark:bg-gray-900">
         
       </main>
     </div>

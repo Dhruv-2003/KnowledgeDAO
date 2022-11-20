@@ -20,7 +20,7 @@ export default function Home() {
           Welcome to KnowledgeDAO
         </h1>
         <h2 className="text-center pt-8 text-xl font-semibold underline dark:text-white">
-          Publish articles on FEVM, get them verified and earn in FILCOIN
+          Publish articles on FEVM, get them verified and earn rewards in FILCOIN
         </h2>
         <div className="mx-auto flex items-center justify-center py-12">
           <JoinDao />

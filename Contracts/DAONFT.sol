@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.14;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -8,21 +8,17 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 /// Soul bound tokens -  can only be minted once , to take part in DAO activity
 
-contract DAOMemberNFT is ERC721, ERC721Enumerable, Ownable {
+contract DAOMemberNFT is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     string baseURI;
 
     uint256 public price = 1 ether;
 
-    mapping(address => bool) public approved;
-
     event Attest(address indexed to, uint256 indexed tokenId);
     event Revoke(address indexed to, uint256 indexed tokenId);
 
-    constructor(string memory _base)
-        ERC721("Scientia DAO Member", "SCIMember")
-    {
+    constructor(string memory _base) ERC721("Knowledge DAO Member", "KnDAO") {
         baseURI = _base;
     }
 
@@ -46,26 +42,35 @@ contract DAOMemberNFT is ERC721, ERC721Enumerable, Ownable {
     /// to mint the token ID for the DAO user to join the DAO
     // only 1 NFT can be minted per User
     function safeMint() public payable {
-        require(msg.value > price, "Invalid Amount sent");
+        require(msg.value >= price, "Invalid Amount sent");
         require(balanceOf(msg.sender) == 0, "You are already a DAO Member");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
     }
 
-    // The following functions are overrides required by Solidity.
-    // we will allow to call transfer only when the nft is either minted or burnt
-    // So the to and fro address will be the 0 address
     function _beforeTokenTransfer(
         address from,
         address to,
         uint256 tokenId
-    ) internal override(ERC721, ERC721Enumerable) {
+    ) internal {
         require(
             to == address(0) || from == address(0),
             "The NFT is non transferrable"
         );
-        // super._beforeTokenTransfer(from, to, tokenId);
+        super._beforeTokenTransfer(from, to, tokenId, 1);
+    }
+
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal {
+        if (from == address(0)) {
+            emit Attest(to, tokenId);
+        } else if (to == address(0)) {
+            emit Revoke(to, tokenId);
+        }
     }
 
     /// can be called by the owner of token to exit the DAO
@@ -84,24 +89,10 @@ contract DAOMemberNFT is ERC721, ERC721Enumerable, Ownable {
         _burn(tokenId);
     }
 
-    /// after any token transfer , events are emitted, revoke show when the NFT is burnt
-    /// attest when NFT is minted
-    function _afterTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId
-    ) internal override {
-        if (from == address(0)) {
-            emit Attest(to, tokenId);
-        } else if (to == address(0)) {
-            emit Revoke(to, tokenId);
-        }
-    }
-
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, ERC721Enumerable)
+        override
         returns (bool)
     {
         return super.supportsInterface(interfaceId);

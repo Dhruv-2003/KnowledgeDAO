@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.14;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -43,7 +43,7 @@ contract ArticleManager is Ownable {
     /// Enables shareable link creation
     mapping(string => uint32) public domains;
 
-    constructor(address _popNFTContract) public {
+    constructor(address _popNFTContract) {
         _nft = POPNFT(_popNFTContract);
     }
 
@@ -55,16 +55,20 @@ contract ArticleManager is Ownable {
         _;
     }
 
+    function setDAOAddress(address _daoAddress) public onlyOwner {
+        DAOAddress = _daoAddress;
+    }
+
     /// @dev function publishResearch
     function publishResearch(
         string memory _ipfsURI,
         string memory domainName,
         string memory _nftURI
-    ) public returns (articleID) {
+    ) public returns (uint32 articleID) {
         uint32 articleId = totalArticles;
         uint32 personalArticleId = totalArticlePublished[msg.sender];
 
-        Article storage _article = Article(
+        Article memory _article = Article(
             msg.sender,
             _ipfsURI,
             block.timestamp,
@@ -88,7 +92,7 @@ contract ArticleManager is Ownable {
     }
 
     /// @dev Start the voting on the research called by the DAO contract
-    function startVoting(uint256 _articleId) public onlyAutorised {
+    function startVoting(uint32 _articleId) public onlyAuthorised {
         require(_articleId < totalArticles, "Invalid article Id");
         Article storage _article = ArticlesPublished[_articleId];
         require(!_article.voting || !_article.verified, "Invalid Call");
@@ -96,7 +100,7 @@ contract ArticleManager is Ownable {
     }
 
     /// @dev function verifyResearch
-    function verifyResearch(uint256 _articleId)
+    function verifyResearch(uint32 _articleId)
         public
         onlyAuthorised
         returns (uint256 _verifiedArticleID)
@@ -116,7 +120,7 @@ contract ArticleManager is Ownable {
     }
 
     /// @dev get functions for researches
-    function getResearch(uint256 _articleId)
+    function getResearch(uint32 _articleId)
         public
         view
         returns (Article memory)
@@ -124,7 +128,7 @@ contract ArticleManager is Ownable {
         return ArticlesPublished[_articleId];
     }
 
-    function getVerifiedResearch(uint256 _VerfiedArticleId)
+    function getVerifiedResearch(uint32 _VerfiedArticleId)
         public
         view
         returns (Article memory)
@@ -132,10 +136,11 @@ contract ArticleManager is Ownable {
         return verfiedArticlesPublished[_VerfiedArticleId];
     }
 
-    function getPersonalResearch(
-        address userAddress,
-        uint256 _personalArticleId
-    ) public view returns (Article memory) {
+    function getPersonalResearch(address userAddress, uint32 _personalArticleId)
+        public
+        view
+        returns (Article memory)
+    {
         return personalArticlesPublished[userAddress][_personalArticleId];
     }
 }

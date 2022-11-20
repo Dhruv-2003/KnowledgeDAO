@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function JoinDao() {
+export default function Join() {
   return (
     <div>
-        
+
     </div>
   )
 }

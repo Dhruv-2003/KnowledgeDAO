@@ -9,6 +9,7 @@ import {
 } from "../constants/constants";
 
 import { StoreArticle } from "../functionality/storeArticle";
+import Pusblished from "../components/Pusblished";
 
 export default function Publish() {
   const [name, setName] = useState("");
@@ -36,8 +37,9 @@ export default function Publish() {
 
   return (
     <>
+      {/* <Pusblished /> */}
       <div className=" dark:bg-gray-900 min-h-screen">
-        <h1 className="text-center text-3xl underline font-bold py-8  dark:text-white">
+        <h1 className="text-center text-3xl underline font-bold py-6  dark:text-white">
           Publish
         </h1>
         <div className=" mx-auto  py-4 w-96 md:w-5/12">
@@ -102,7 +104,7 @@ export default function Publish() {
                 setContent(e.target.value);
               }}
               id="message"
-              rows="12"
+              rows="10"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Write your article here..."
             ></textarea>

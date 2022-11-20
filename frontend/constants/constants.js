@@ -4,7 +4,7 @@ export const NFT_STORAGE_API_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEVERWJCMEZCNTk3REI4MTUxNkU5M2Y4YmM3RjJmQ0Q2ODYzNDAyOEUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1ODU4MDY5OTE4MSwibmFtZSI6Ik11c2ljMyJ9.V6Ny_9VV_XLIIFDFIEG8alEdJTwxmfHJMaMDJEf00L4";
 
 export const ArticleManager_Address =
-  "0xbef94d0057d49dF27C75c6172f2c5d51B16dd128";
+  "0x12f059175Fe7027fDCAE54c5FF40F6393Be378B7";
 export const POPNFT_Address = "0xEFa08fa2b8adc46CabA7BDBAC894923190Ee8B2e";
 export const DAOVoting_Address = "0x172d8d1Cd2550A164d99cd7C4ABA41890eE4F190";
 export const DAONFT_Address = "0xCc5FEc113BF4d6bbe78F66a00D7DF5876732f920";
@@ -44,113 +44,6 @@ export const ArticleManager_ABI = [
     ],
     name: "OwnershipTransferred",
     type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_ipfsURI",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "domainName",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_nftURI",
-        type: "string",
-      },
-    ],
-    name: "publishResearch",
-    outputs: [
-      {
-        internalType: "uint32",
-        name: "articleID",
-        type: "uint32",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_daoAddress",
-        type: "address",
-      },
-    ],
-    name: "setDAOAddress",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_nftAddress",
-        type: "address",
-      },
-    ],
-    name: "setNFTAddress",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint32",
-        name: "_articleId",
-        type: "uint32",
-      },
-    ],
-    name: "startVoting",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint32",
-        name: "_articleId",
-        type: "uint32",
-      },
-    ],
-    name: "verifyResearch",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "_verifiedArticleID",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
   },
   {
     inputs: [
@@ -218,6 +111,25 @@ export const ArticleManager_ABI = [
       },
     ],
     name: "domains",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_domain",
+        type: "string",
+      },
+    ],
+    name: "getArticleId",
     outputs: [
       {
         internalType: "uint32",
@@ -464,6 +376,81 @@ export const ArticleManager_ABI = [
   {
     inputs: [
       {
+        internalType: "string",
+        name: "_ipfsURI",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "domainName",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_nftURI",
+        type: "string",
+      },
+    ],
+    name: "publishResearch",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "articleID",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_daoAddress",
+        type: "address",
+      },
+    ],
+    name: "setDAOAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_nftAddress",
+        type: "address",
+      },
+    ],
+    name: "setNFTAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint32",
+        name: "_articleId",
+        type: "uint32",
+      },
+    ],
+    name: "startVoting",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "",
         type: "address",
@@ -509,6 +496,19 @@ export const ArticleManager_ABI = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint32",
         name: "",
         type: "uint32",
@@ -548,6 +548,25 @@ export const ArticleManager_ABI = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint32",
+        name: "_articleId",
+        type: "uint32",
+      },
+    ],
+    name: "verifyResearch",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "_verifiedArticleID",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];

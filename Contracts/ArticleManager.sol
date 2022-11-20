@@ -84,7 +84,7 @@ contract ArticleManager is Ownable {
         /// Storing the Record
         ArticlesPublished[articleId] = _article;
         personalArticlesPublished[msg.sender][personalArticleId] = _article;
-
+        domains[domainName] = articleId;
         ///NFT minted
         // _nft.safeMint(msg.sender, articleId, _nftURI);
 

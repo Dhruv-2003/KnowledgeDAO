@@ -13,7 +13,7 @@ export default function Publish() {
         <Flowbite>
           <DarkThemeToggle />
         </Flowbite>
-        <h1 className="text-center text-3xl  font-bold my-4 dark:text-white">Publish</h1>
+        <h1 className="text-center text-3xl underline font-bold my-4 dark:text-white">Publish</h1>
         <div className=" mx-auto  py-4 w-96 md:w-5/12">
           <div className="grid gap-6 mb-6 md:grid-cols-2">
             <div>

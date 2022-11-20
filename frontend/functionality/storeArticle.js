@@ -11,20 +11,22 @@ function MakeStorageClient() {
   return new Web3Storage({ token: getAccessToken() });
 }
 
-export const StorePageData = async (
-  pageName,
-  pageDescription,
-  domainName,
-  contactDetails
+export const StoreArticle = async (
+  publisherName,
+  publisherAddress,
+  articleName,
+  articleContent,
+  articleMediaURI
 ) => {
   const obj = {
-    PageName: pageName,
-    PageDescription: pageDescription,
-    Domain: domainName,
-    Contact: contactDetails,
+    PublisherName: publisherName,
+    PublisherAddress: publisherAddress,
+    ArticleName: articleName,
+    ArticleContent: articleContent,
+    ArticleMedia: articleMediaURI,
   };
   const blob = new Blob([JSON.stringify(obj)], { type: "application/json" });
-  const files = [new File([blob], "request.json")];
+  const files = [new File([blob], "article.json")];
   console.log("Uploading data to IPFS with web3.storage....");
   const client = MakeStorageClient();
   const cid = await client.put(files, { wrapWithDirectory: false });

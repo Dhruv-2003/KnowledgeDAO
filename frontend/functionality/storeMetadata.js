@@ -2,10 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { NFTStorage } from "nft.storage";
 import { NFT_STORAGE_API_KEY } from "../constants";
+
 /// used NFT.storage to prepare the metadata for the NFT
 export const StoreMetadata = async (image, Name, invoiceURI) => {
-  // const nftstorage_key = process.env.NFT_STORAGE_API_KEY;
-
   console.log("Preparing Metadata ....");
   const nft = {
     image: image,

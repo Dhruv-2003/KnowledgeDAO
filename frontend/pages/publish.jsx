@@ -2,10 +2,29 @@ import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 
+import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+
 export default function Publish() {
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+
+  const Contract = useContract({
+    address: data.address,
+    abi: data.abi,
+    signerOrProvider: signer || provider,
+  });
+
+  const component2 = () => {
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
